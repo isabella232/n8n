@@ -19,6 +19,15 @@ import * as _ from 'lodash';
 
 export async function slackApiRequest(this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, method: string, resource: string, body: object = {}, query: object = {}, headers: {} | undefined = undefined, option: {} = {}): Promise<any> { // tslint:disable-line:no-any
 	const authenticationMethod = this.getNodeParameter('authentication', 0, 'accessToken') as string;
+	const team_id = "T028CG04Y";
+	if(body && body != {})
+	{
+		Object.assign(body, body, { "team_id": team_id });
+	}
+	if(query){
+		Object.assign(query, query, { "team_id": team_id});
+	}
+
 	let options: OptionsWithUri = {
 		method,
 		headers: headers || {
@@ -46,6 +55,8 @@ export async function slackApiRequest(this: IExecuteFunctions | IExecuteSingleFu
 			}
 			options.headers!.Authorization = `Bearer ${credentials.accessToken}`;
 			//@ts-ignore
+			console.log(options);
+
 			response = await this.helpers.request(options);
 		} else {
 
@@ -54,6 +65,7 @@ export async function slackApiRequest(this: IExecuteFunctions | IExecuteSingleFu
 				property: 'authed_user.access_token',
 			};
 			//@ts-ignore
+
 			response = await this.helpers.requestOAuth2.call(this, 'slackOAuth2Api', options, oAuth2Options);
 		}
 
