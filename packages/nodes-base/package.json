@@ -329,7 +329,7 @@
       "dist/credentials/ZulipApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ePayables/epayables.node.js",
+      "dist/nodes/Epayables/Epayables.node.js",
       "dist/nodes/ActionNetwork/ActionNetwork.node.js",
       "dist/nodes/ActiveCampaign/ActiveCampaign.node.js",
       "dist/nodes/ActiveCampaign/ActiveCampaignTrigger.node.js",
